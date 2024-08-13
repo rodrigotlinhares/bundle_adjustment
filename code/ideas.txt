@@ -1,0 +1,27 @@
+- Hexagonal template structure
+- Parallelize mat multiplications (in parameter updates)
+- Use gradient norm images (apply blur before)
+- Incorporate bending energy variable (see Bookstein 89 TPS and Richa's code (naya TPS))
+- Blur images before compensation
+- What happens when a template has no neighbors? No combinations that contain it are created. Is it
+  not adjusted? Wouldn't that detriment the final mosaic?
+- Does the fact that there is rarely a direct path to the anchor have a significant impact on the
+  final mosaic? See heat maps in CIARP paper, for example. There is a huge circle of templates that
+  isn't even close to the center. That probably has something to do with the poor results.
+- Some of the deformable mean images created during illumination compensation are really messed up.
+  Affected areas seem to be filtered by the masks. Check to make sure.
+- What happens to the estimated warp when a template has two neighbors? It should become all messed
+  up, due to the template trying to move to two sides at the same time. Maybe this is the reason the
+  resulting mosaic is completely deformed. The use of local regions for the adjustment should fix
+  this.
+- Split the image into regions and align them separately
+
+- Ignore template pairs whose similarity is too low or whose overlap is too small.
+- Add another parameter to the equation being minimized, representing the bending energy of the
+  two templates: Σ(I(x) - T(x)) + λΣ(cI - cT)², where λ is a constant that regulates the weight of
+  the new value and cI - cT is the distance between each respective control point in I and T.
+  Separate x from y when measuring that distance to prevent a circular acceptable area between
+  control points.
+  - Another possible parameter would be a weight for each term of each pair's equation based on
+    their NCC similarity.
+- Find another illumination compensation method

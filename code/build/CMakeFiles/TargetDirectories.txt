@@ -1,0 +1,2 @@
+/home/rodrigolinhares/code/bundle_adjustment/code/build/CMakeFiles/all_workspaces.dir
+/home/rodrigolinhares/code/bundle_adjustment/code/build/CMakeFiles/single_workspace.dir
